@@ -1,0 +1,1617 @@
+
+:root {
+  --ivory: #f6f1e7;
+  --cream: #eee8dc;
+  --green: #203d32;
+  --green-light: #345748;
+  --booking-green: #657b63;
+  --gold: #b69a68;
+  --sage: #899779;
+  --text: #343b32;
+  --muted: #77796e;
+  --white: #fffdf8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 78px;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.vine-library {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+
+/* HEADER */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  min-height: 76px;
+  padding: 15px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  background: rgba(246, 241, 231, .97);
+  border-bottom: 1px solid rgba(182, 154, 104, .2);
+  box-shadow: 0 4px 18px rgba(32, 61, 50, .08);
+  transform: translateY(-110%);
+  transition: transform .35s ease,
+              min-height .3s ease,
+              padding .3s ease;
+}
+
+.navbar.nav-visible {
+  transform: translateY(0);
+}
+
+.brand {
+  flex-shrink: 0;
+  color: var(--green);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: .2px;
+  transition: font-size .3s ease;
+}
+
+.brand span {
+  font-weight: 500;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 23px;
+}
+
+.navbar nav a {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 600;
+  transition: color .2s ease;
+}
+
+.navbar nav a:hover {
+  color: var(--gold);
+}
+
+.navbar.scrolled {
+  min-height: 48px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.navbar.scrolled .brand {
+  font-size: 20px;
+}
+
+.navbar.scrolled nav {
+  gap: 17px;
+}
+
+.navbar.scrolled nav a {
+  font-size: 10px;
+}
+
+
+/* HERO */
+
+.hero-cover {
+  min-height: 100svh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background-image: url("images/IMG-20261113-WA0094.jpg");
+  background-size: cover;
+  background-position: center 42%;
+  overflow: hidden;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 27, 21, .25),
+    rgba(15, 27, 21, .48)
+  );
+}
+
+/*
+  The content moves upward.
+  The buttons move separately downward.
+  Hero entrance animation uses opacity only so it
+  cannot override these positioning transforms.
+*/
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: min(90%, 760px);
+  padding: 55px 15px;
+  transform: translateY(-38px);
+  animation: heroAppear 1.1s ease both;
+}
+
+.hero-overline {
+  color: #e8d6ae;
+  font-size: 11px;
+  letter-spacing: 4px;
+  margin-bottom: 18px;
+}
+
+.hero-content h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 8vw, 88px);
+  line-height: .98;
+  font-weight: 500;
+  text-shadow: 0 3px 25px rgba(0, 0, 0, .25);
+}
+
+.hero-small {
+  margin-top: 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(17px, 2.5vw, 23px);
+  letter-spacing: 1px;
+}
+
+.hero-buttons {
+  margin-top: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  position: relative;
+  transform: translateY(65px);
+}
+
+.btn {
+  min-height: 46px;
+  padding: 13px 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background .25s ease,
+              color .25s ease,
+              border-color .25s ease,
+              transform .25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-light {
+  color: var(--green);
+  background: var(--ivory);
+}
+
+.btn-light:hover {
+  background: white;
+}
+
+.btn-outline {
+  color: white;
+  border-color: rgba(255, 255, 255, .8);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  color: var(--green);
+  background: white;
+}
+
+.btn-dark {
+  color: white;
+  background: var(--green);
+}
+
+.btn-dark:hover {
+  background: var(--green-light);
+}
+
+@keyframes heroAppear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* SHARED SECTION STYLES */
+
+.section-space {
+  position: relative;
+  padding: 100px 7%;
+  overflow: hidden;
+}
+
+.section-inner {
+  position: relative;
+  z-index: 3;
+  width: min(100%, 1120px);
+  margin: 0 auto;
+}
+
+.eyebrow {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.section-heading {
+  margin: 0 auto 42px;
+  max-width: 650px;
+  text-align: center;
+}
+
+.section-heading h2,
+.story h2,
+.contact-section h2 {
+  margin-top: 10px;
+  color: var(--green);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(39px, 5vw, 57px);
+  line-height: 1.05;
+  font-weight: 500;
+}
+
+.section-heading > p:last-child {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.gold-line {
+  width: 55px;
+  height: 1px;
+  margin: 22px auto;
+  background: var(--gold);
+}
+
+
+/* BOTANICAL VINES */
+
+/*
+  Important:
+  The vine is drawn using the SVG <use> element.
+  Stroke dash animation is applied to the referenced artwork.
+  The whole vine gently rotates while visible.
+*/
+
+.vine {
+  position: absolute;
+  z-index: 1;
+  width: 245px;
+  height: 490px;
+  overflow: visible;
+  pointer-events: none;
+  opacity: .48;
+  transform-origin: center;
+}
+
+/* Start with the vine artwork hidden */
+
+.vine use {
+  opacity: 0;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition:
+    stroke-dashoffset 3.2s cubic-bezier(.45, 0, .2, 1),
+    opacity .8s ease;
+}
+
+/* When the section enters view, draw the artwork */
+
+.vine.is-visible use {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
+/* Continuous gentle movement while visible */
+
+.vine.is-visible {
+  animation: vineSway 6s ease-in-out infinite;
+}
+
+/* Slightly different movement timing for natural variation */
+
+.vine-gallery.is-visible {
+  animation-duration: 7.5s;
+}
+
+.vine-services.is-visible {
+  animation-duration: 6.8s;
+}
+
+.vine-contact.is-visible {
+  animation-duration: 7.2s;
+}
+
+.vine-booking.is-visible {
+  animation-duration: 6.5s;
+}
+
+@keyframes vineSway {
+  0%, 100% {
+    rotate: -1.2deg;
+  }
+
+  50% {
+    rotate: 1.2deg;
+  }
+}
+
+/* Different vine positions in different sections */
+
+.vine-story {
+  left: -35px;
+  bottom: -95px;
+  transform: rotate(-12deg);
+}
+
+.vine-gallery {
+  right: -45px;
+  top: 25px;
+  transform: rotate(120deg) scale(.95);
+  opacity: .34;
+}
+
+.vine-services {
+  left: -55px;
+  top: 5px;
+  transform: rotate(25deg) scale(.9);
+  opacity: .35;
+}
+
+.vine-contact {
+  right: -35px;
+  bottom: -75px;
+  transform: rotate(95deg) scale(.95);
+  opacity: .4;
+}
+
+.vine-booking {
+  left: -55px;
+  top: -5px;
+  transform: rotate(18deg) scale(.9);
+  opacity: .29;
+}
+
+
+/* OUR STORY */
+
+.story {
+  background: var(--ivory);
+  text-align: center;
+}
+
+.story-inner {
+  max-width: 760px;
+}
+
+.story h2 {
+  margin-top: 14px;
+}
+
+.story-tagline {
+  max-width: 620px;
+  margin: 0 auto 18px;
+  color: var(--green);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 3vw, 29px);
+  line-height: 1.4;
+}
+
+.story-copy {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2;
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: 28px;
+  padding-bottom: 6px;
+  color: var(--green);
+  border-bottom: 1px solid var(--gold);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.text-link span {
+  margin-left: 5px;
+  color: var(--gold);
+}
+
+
+/* GALLERY */
+
+.gallery-section {
+  background: #eee8dc;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.gallery-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 13px;
+  background: #ded7c9;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(32, 61, 50, .08);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.055);
+}
+
+.gallery-item:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+
+/* SERVICES — REDUCED EMPTY SPACE */
+
+.services-section {
+  background: var(--ivory);
+  padding-top: 68px;
+  padding-bottom: 72px;
+}
+
+.services-section .section-heading {
+  margin-bottom: 25px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.service-card {
+  min-height: 0;
+  padding: 23px 24px 25px;
+  text-align: center;
+  background: rgba(255, 253, 248, .86);
+  border: 1px solid rgba(182, 154, 104, .35);
+  border-radius: 4px;
+  transition: transform .3s ease,
+              box-shadow .3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(32, 61, 50, .07);
+}
+
+.service-number {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--gold);
+  font-size: 19px;
+}
+
+.service-card h3 {
+  color: var(--green);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.service-card p {
+  max-width: 390px;
+  margin: 8px auto 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+
+/* CONTACT — WARM CREAM */
+
+.contact-section {
+  position: relative;
+  padding: 82px 7%;
+  overflow: hidden;
+  color: var(--text);
+  background: #EEE8DC;
+  text-align: center;
+}
+
+.contact-section h2 {
+  color: var(--green);
+}
+
+.contact-section .eyebrow {
+  color: #927849;
+}
+
+.contact-section .gold-line {
+  background: #b69a68;
+}
+
+.contact-intro {
+  margin: 0 auto;
+  color: #77796e;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 38px;
+  margin-top: 38px;
+}
+
+.social-link {
+  min-width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  color: var(--green);
+  font-size: 11px;
+  transition: color .2s ease,
+              transform .2s ease;
+}
+
+.social-link:hover {
+  color: #927849;
+  transform: translateY(-4px);
+}
+
+.social-link svg {
+  width: 27px;
+  height: 27px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.social-link .icon-fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+
+/* BOOKING — BOTANICAL GREEN */
+
+.booking-section {
+  background: #657B63;
+}
+
+.booking-section .section-heading h2,
+.booking-section .section-heading > p:last-child {
+  color: #fffdf8;
+}
+
+.booking-section .section-heading .eyebrow {
+  color: #ead6a9;
+}
+
+.booking-section .gold-line {
+  background: #ead6a9;
+}
+
+.booking-inner {
+  max-width: 790px;
+}
+
+.booking-form {
+  padding: 34px;
+  background: var(--white);
+  border: 1px solid rgba(255, 255, 255, .45);
+  box-shadow: 0 12px 35px rgba(20, 38, 26, .12);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 13px;
+  color: var(--text);
+  background: #fbf9f4;
+  border: 1px solid #ded8ca;
+  border-radius: 2px;
+  outline: none;
+  font-size: 13px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 2px rgba(137, 151, 121, .12);
+}
+
+.booking-form .btn {
+  width: 100%;
+}
+
+.form-note {
+  margin-top: 14px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 11px;
+}
+
+/* Brand name sits below the Booking form */
+
+.booking-brand {
+  margin-top: 34px;
+  color: #f2e5c8;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 27px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.hidden-field {
+  display: none;
+}
+
+
+/* WHATSAPP */
+
+.whatsapp-float {
+  position: fixed;
+  z-index: 90;
+  right: 20px;
+  bottom: 20px;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  background: #238b58;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, .2);
+  transition: transform .2s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.08);
+}
+
+.whatsapp-float svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* LIGHTBOX */
+
+.lightbox {
+  position: fixed;
+  z-index: 300;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 55px 65px;
+  background: rgba(12, 18, 14, .95);
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: min(85vw, 900px);
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 5px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .3);
+}
+
+.lightbox-close,
+.lightbox-arrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.lightbox-close {
+  top: 15px;
+  right: 25px;
+  font-size: 38px;
+}
+
+.lightbox-arrow {
+  top: 50%;
+  width: 45px;
+  height: 55px;
+  font-size: 28px;
+  transform: translateY(-50%);
+}
+
+.lightbox-prev {
+  left: 12px;
+}
+
+.lightbox-next {
+  right: 12px;
+}
+
+.lightbox-count {
+  position: absolute;
+  bottom: 17px;
+  left: 50%;
+  color: white;
+  font-size: 12px;
+  transform: translateX(-50%);
+}
+
+
+/* FOOTER */
+
+.footer {
+  padding: 18px 15px;
+  color: rgba(255, 253, 248, .7);
+  background: #192f27;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: .5px;
+}
+
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+  .navbar {
+    padding-left: 4%;
+    padding-right: 4%;
+    gap: 14px;
+  }
+
+  .navbar nav {
+    gap: 13px;
+  }
+
+  .navbar nav a {
+    font-size: 11px;
+  }
+
+  .brand {
+    font-size: 23px;
+  }
+
+  .gallery-grid {
+    gap: 13px;
+  }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  html {
+    scroll-padding-top: 62px;
+  }
+
+  .navbar {
+    min-height: 48px;
+    padding: 7px 10px;
+    gap: 8px;
+  }
+
+  .brand {
+    font-size: 17px;
+    line-height: 1;
+  }
+
+  .navbar nav {
+    width: auto;
+    justify-content: flex-end;
+    gap: 9px;
+    flex-wrap: nowrap;
+  }
+
+  .navbar nav a {
+    font-size: 8px;
+    white-space: nowrap;
+  }
+
+  .navbar.scrolled {
+    min-height: 42px;
+    padding: 6px 9px;
+  }
+
+  .navbar.scrolled .brand {
+    font-size: 15px;
+  }
+
+  .navbar.scrolled nav {
+    gap: 8px;
+  }
+
+  .navbar.scrolled nav a {
+    font-size: 8px;
+  }
+
+  .hero-cover {
+    min-height: 100svh;
+    background-position: center 42%;
+  }
+
+  .hero-content {
+    padding: 40px 10px;
+    transform: translateY(-225px);
+  }
+
+  .hero-overline {
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(43px, 12vw, 65px);
+  }
+
+  .hero-small {
+    font-size: 17px;
+  }
+
+  .hero-buttons {
+    gap: 9px;
+    margin-top: 27px;
+    transform: translateY(395px);
+  }
+
+  .btn {
+    min-height: 43px;
+    padding: 12px 16px;
+    font-size: 9px;
+  }
+
+  .section-space {
+    padding: 70px 5%;
+  }
+
+  .section-heading {
+    margin-bottom: 30px;
+  }
+
+  .section-heading h2,
+  .story h2,
+  .contact-section h2 {
+    font-size: 42px;
+  }
+
+  .story-tagline {
+    font-size: 23px;
+  }
+
+  .story-copy {
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  /* Gallery: 2 columns on phones */
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .gallery-item {
+    aspect-ratio: 4 / 5;
+    border-radius: 9px;
+  }
+
+  /* Compact Services */
+
+  .services-section {
+    padding-top: 52px;
+    padding-bottom: 55px;
+  }
+
+  .services-section .section-heading {
+    margin-bottom: 20px;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .service-card {
+    padding: 20px 17px;
+  }
+
+  .service-card h3 {
+    font-size: 24px;
+  }
+
+  .service-card p {
+    font-size: 12px;
+  }
+
+  /* Contact */
+
+  .contact-section {
+    padding: 65px 5%;
+  }
+
+  .social-links {
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .social-link {
+    min-width: 58px;
+    font-size: 10px;
+  }
+
+  /* Booking */
+
+  .booking-form {
+    padding: 22px 17px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .booking-brand {
+    margin-top: 28px;
+    font-size: 24px;
+  }
+
+  /* Mobile vines */
+
+  .vine {
+    width: 155px;
+    height: 310px;
+    opacity: .38;
+  }
+
+  .vine-story {
+    left: -58px;
+  }
+
+  .vine-gallery {
+    right: -65px;
+  }
+
+  .vine-services {
+    left: -72px;
+  }
+
+  .vine-contact {
+    right: -62px;
+  }
+
+  .vine-booking {
+    left: -70px;
+  }
+
+  .whatsapp-float {
+    width: 49px;
+    height: 49px;
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .lightbox {
+    padding: 50px 35px;
+  }
+
+  .lightbox img {
+    max-width: 88vw;
+    max-height: 78vh;
+  }
+
+  .lightbox-prev {
+    left: 2px;
+  }
+
+  .lightbox-next {
+    right: 2px;
+  }
+
+}
+
+
+/* SMALL PHONES */
+
+@media (max-width: 370px) {
+
+  .brand {
+    font-size: 20px;
+  }
+
+  .navbar nav {
+    gap: 6px;
+  }
+
+  .navbar nav a {
+    font-size: 7px;
+  }
+
+  .navbar.scrolled .brand {
+    font-size: 13px;
+  }
+
+  .navbar.scrolled nav {
+    gap: 5px;
+  }
+
+  .navbar.scrolled nav a {
+    font-size: 7px;
+  }
+
+  .hero-buttons .btn {
+    padding: 11px 12px;
+  }
+
+}
+
+
+/* REDUCED MOTION ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+
+}
+
+/* SECOND VINE — OPPOSITE SIDE */
+.vine-second {
+  
+  position: absolute !important;
+  top: auto !important;
+  left: auto !important;
+  right: -70px !important;
+  bottom: -100px !important;
+
+  width: 320px !important;
+  height: 560px !important;
+
+  transform: rotate(-45deg) !important;
+  transform-origin: bottom right;
+
+  opacity: 0.88;
+  pointer-events: none;
+  z-index: 0;
+  
+}
+
+.vine-extra {
+  position: absolute !important;
+  top: -450px !important;
+  left: 80px !important;
+  right: auto !important;
+
+
+  width: 520px !important;
+  height: 800px !important;
+
+  transform: rotate(30deg) !important;
+  transform-origin: left;
+
+  opacity: 0.68;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vine-third {
+  position: absolute !important;
+  top: 100px !important;
+  left: 80px !important;
+  right: auto !important;
+
+
+  width: 420px !important;
+  height: 1800px !important;
+
+  transform: rotate(18deg) !important;
+  transform-origin: left;
+
+  opacity: 0.88;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =====================================
+   HAMBURGER NAVIGATION
+===================================== */
+
+.navbar {
+  justify-content: space-between;
+}
+
+.menu-toggle {
+  width: 43px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 27px;
+  height: 2px;
+  background: var(--green);
+  border-radius: 3px;
+  transition: .3s ease;
+}
+
+.menu-toggle.active span:first-child {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:last-child {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.navbar .menu-panel {
+  position: absolute;
+  top: 100%;
+  right: 6%;
+  width: 210px;
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  flex-wrap: nowrap;
+  background: var(--ivory);
+  border: 1px solid rgba(182, 154, 104, .4);
+  box-shadow: 0 10px 25px rgba(32, 61, 50, .12);
+}
+
+.navbar .menu-panel.open {
+  display: flex;
+}
+
+.navbar .menu-panel a {
+  padding: 14px 20px;
+  font-size: 24px !important;
+  border-bottom: 1px solid rgba(182, 154, 104, .18);
+}
+
+.navbar .menu-panel a:last-child {
+  border-bottom: 0;
+}
+
+.navbar .menu-panel a:hover {
+  background: var(--cream);
+  color: var(--gold);
+}
+
+/* =====================================
+   LARGER TEXT THROUGHOUT WEBSITE
+===================================== */
+
+.story-copy,
+.contact-intro,
+.section-heading > p:last-child,
+.service-card p {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.story-tagline {
+  font-size: clamp(24px, 3vw, 31px);
+  line-height: 1.45;
+}
+
+.service-card h3 {
+  font-size: 30px;
+}
+
+.eyebrow {
+  font-size: 12px;
+}
+
+.text-link {
+  font-size: 14px;
+}
+
+.form-group label {
+  font-size: 15px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  font-size: 16px;
+}
+
+.booking-form .btn {
+  font-size: 15px;
+}
+
+.form-note {
+  font-size: 13px;
+}
+
+/* =====================================
+   CONTACT — BIGGER ICONS AND TEXT
+===================================== */
+
+#contact {
+  padding-top: 95px;
+  padding-bottom: 95px;
+}
+
+#contact h2 {
+  font-size: clamp(44px, 5vw, 60px);
+}
+
+#contact .contact-intro {
+  font-size: 17px;
+}
+
+#contact .social-links {
+  gap: 48px;
+  margin-top: 45px;
+}
+
+#contact .social-link {
+  min-width: 90px;
+  gap: 14px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#contact .social-link svg {
+  width: 43px;
+  height: 43px;
+  stroke-width: 1.9;
+}
+
+/* =====================================
+   MOBILE ADJUSTMENTS
+===================================== */
+
+@media (max-width: 600px) {
+
+  .navbar {
+    min-height: 52px;
+    padding: 7px 15px;
+  }
+
+  .brand {
+    font-size: 24px;
+  }
+
+  .navbar.scrolled .brand {
+    font-size: 22px;
+  }
+
+  .navbar .menu-panel {
+    right: 12px;
+    width: 200px;
+  }
+
+  .navbar .menu-panel a {
+  padding: 14px 20px;
+  font-size: 13px !important;
+  }
+
+  .story-copy,
+  .contact-intro,
+  .section-heading > p:last-child,
+  .service-card p {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .story-tagline {
+    font-size: 20px;
+  }
+
+  .service-card h3 {
+    font-size: 27px;
+  }
+
+  .form-group label {
+    font-size: 15px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px;
+  }
+
+  #contact {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  #contact h2 {
+    font-size: 46px;
+  }
+
+  #contact .contact-intro {
+    font-size: 16px;
+  }
+
+  #contact .social-links {
+    gap: 32px;
+    row-gap: 30px;
+    margin-top: 38px;
+  }
+
+  #contact .social-link {
+    min-width: 82px;
+    font-size: 15px;
+    gap: 12px;
+  }
+
+  #contact .social-link svg {
+    width: 40px;
+    height: 40px;
+  }
+
+}
+
+@media (max-width: 370px) {
+  .brand {
+    font-size: 17px;
+  }
+}
+
+/* CONTACT SECTION */
+#contact {
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+
+#contact .contact-intro {
+  margin: 12px auto 20px;
+  line-height: 1.4;
+}
+
+/* KEEP ALL FOUR ICONS IN ONE ROW */
+#contact .social-links {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 20px auto 0;
+  width: 100%;
+}
+
+#contact .social-link {
+  flex: 1;
+  min-width: 0;
+  gap: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+#contact .social-link svg {
+  width: 32px;
+  height: 32px;
+}
+
+#contact h2 {
+  margin-bottom: 12px;
+}
+
+/* =====================================
+   GALLERY — DECORATIVE EDGE VINES
+   (created in script.js, reuse #vine-art)
+===================================== */
+
+.vine.gallery-vine {
+  top: var(--vine-top);
+  width: var(--vine-w);
+  height: calc(var(--vine-w) * 2);
+  opacity: var(--vine-opacity);
+  transform: rotate(var(--vine-rot)) scaleX(var(--vine-flip));
+}
+
+.gallery-vine-left {
+  left: var(--vine-edge);
+}
+
+.gallery-vine-right {
+  right: var(--vine-edge);
+}
+
+.vine.gallery-vine.is-visible {
+  animation-duration: var(--vine-sway, 6s);
+}
+
+/* FORCE BOTANICAL VINE VISIBILITY ON THANK YOU PAGE */
+
+.thank-you-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.thank-you-page .vine-story {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  position: absolute !important;
+  left: -35px !important;
+  right: auto !important;
+  top: 50% !important;
+
+  width: 220px !important;
+  height: 440px !important;
+
+  transform: translateY(-50%) !important;
+
+  z-index: 1 !important;
+  pointer-events: none;
+}
+
+.thank-you-page .vine-story .vine-stem,
+.thank-you-page .vine-story .vine-detail,
+.thank-you-page .vine-story .vine-gold,
+.thank-you-page .vine-story .vine-gold-dot {
+  visibility: visible !important;
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+.thank-you-page .section-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.thank-you-page .btn {
+  margin-top: 50px;
+}
+
+/* PERFORMANCE AND IMAGE RENDERING */
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  content-visibility: auto;
+}
+
+.lightbox img {
+  image-rendering: auto;
+}
