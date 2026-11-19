@@ -5,10 +5,10 @@
 
 const SITE_CONFIG = {
   whatsappNumber: "919723259009",
-  instagram: "PASTE_INSTAGRAM_LINK",
-  youtube: "PASTE_YOUTUBE_LINK",
-  googleMaps: "PASTE_GOOGLE_MAPS_LINK",
-  email: "YOUR_BUSINESS_EMAIL"
+  instagram: "https://www.instagram.com/dimpal.mehendiart?lqvp=OGZiOGtscGJzcXgz",
+  youtube: "https://youtube.com/@dimpalmehendiart?si=_AzLCuCr1iPIEwoN",
+  googleMaps: "https://maps.app.goo.gl/9gFsiEkBqvrZoYGX6",
+  email: "dimpalmehendiart@gmail.com"
 };
 
 
