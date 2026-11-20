@@ -290,90 +290,92 @@
         <div class="gold-line"></div>
         <p>Share a few details and let's plan your special occasion.</p>
       </div>
+     
+<form
+  class="booking-form"
+  method="POST"
+  action="https://formsubmit.co/dimpalmehendiart@gmail.com"
+>
 
-      <form class="booking-form"
-        name="mehendi-booking"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        action="/thank-you.html"
+  <!-- Email subject -->
+  <input type="hidden" name="_subject"
+    value="New Mehendi Booking Enquiry">
 
-        <input type="hidden" name="form-name" value="mehendi-booking">
+  <!-- Redirect to your thank-you page -->
+  <input type="hidden" name="_next"
+    value="https://dxxxmehendiart.run.place/thank-you.html">
 
-        <p class="hidden-field">
-          <label>Don't fill this out:
-            <input name="bot-field">
-          </label>
-        </p>
+  <!-- Spam protection -->
+  <input type="text" name="_honey" style="display:none">
 
-        <div class="form-row">
+  <div class="form-row">
 
-          <div class="form-group">
-            <label for="name">Your Name *</label>
-            <input type="text" id="name" name="name"
-              placeholder="Enter your name" required>
-          </div>
+    <div class="form-group">
+      <label for="name">Your Name *</label>
+      <input type="text" id="name" name="name"
+        placeholder="Enter your name" required>
+    </div>
 
-          <div class="form-group">
-            <label for="phone">Phone Number *</label>
-            <input type="tel" id="phone" name="phone"
-              placeholder="Enter your phone number" required>
-          </div>
+    <div class="form-group">
+      <label for="phone">Phone Number *</label>
+      <input type="tel" id="phone" name="phone"
+        placeholder="Enter your phone number" required>
+    </div>
 
-        </div>
+  </div>
 
-        <div class="form-row">
+  <div class="form-row">
 
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email"
-              placeholder="Enter your email">
-          </div>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email"
+        placeholder="Enter your email">
+    </div>
 
-          <div class="form-group">
-            <label for="occasion">Occasion *</label>
-            <select id="occasion" name="occasion" required>
-              <option value="">Choose an occasion</option>
-              <option>Bridal Mehendi</option>
-              <option>Engagement Mehendi</option>
-              <option>Festival Mehendi</option>
-              <option>Special Occasion</option>
-              <option>Other</option>
-            </select>
-          </div>
+    <div class="form-group">
+      <label for="occasion">Occasion *</label>
+      <select id="occasion" name="occasion" required>
+        <option value="">Choose an occasion</option>
+        <option>Bridal Mehendi</option>
+        <option>Engagement Mehendi</option>
+        <option>Festival Mehendi</option>
+        <option>Special Occasion</option>
+        <option>Other</option>
+      </select>
+    </div>
 
-        </div>
+  </div>
 
-        <div class="form-row">
+  <div class="form-row">
 
-          <div class="form-group">
-            <label for="date">Event Date</label>
-            <input type="date" id="date" name="event-date">
-          </div>
+    <div class="form-group">
+      <label for="date">Event Date</label>
+      <input type="date" id="date" name="event-date">
+    </div>
 
-          <div class="form-group">
-            <label for="location">Event Location</label>
-            <input type="text" id="location" name="event-location"
-              placeholder="Enter event location">
-          </div>
+    <div class="form-group">
+      <label for="location">Event Location</label>
+      <input type="text" id="location" name="event-location"
+        placeholder="Enter event location">
+    </div>
 
-        </div>
+  </div>
 
-        <div class="form-group">
-          <label for="message">Tell Us More</label>
-          <textarea id="message" name="message" rows="4"
-            placeholder="Share any details about your mehendi booking..."></textarea>
-        </div>
+  <div class="form-group">
+    <label for="message">Tell Us More</label>
+    <textarea id="message" name="message" rows="4"
+      placeholder="Share any details about your mehendi booking..."></textarea>
+  </div>
 
-        <button type="submit" class="btn btn-dark">
-          Send Booking Enquiry
-        </button>
+  <button type="submit" class="btn btn-dark">
+    Send Booking Enquiry
+  </button>
 
-        <p class="form-note">
-          We'll get in touch with you about your enquiry.
-        </p>
+  <p class="form-note">
+    We'll get in touch with you about your enquiry.
+  </p>
 
-      </form>
+</form>
 
       <p class="booking-brand">Dimpal Mehendi Art</p>
 
