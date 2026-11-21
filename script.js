@@ -33,7 +33,7 @@ const photos = [
   "IMG-20261113-WA0098.jpg",
   "IMG-20261113-WA0105.jpg",
   "IMG-20261113-WA0106.jpg",
-  "IMG-20261113-WA0107.jpg",
+  "IMG_20261113_174558.jpg",
   "IMG-20261113-WA0108.jpg",
   "IMG-20261113-WA0112.jpg",
   "IMG-20261111-WA0008.jpg",
@@ -104,63 +104,132 @@ if (galleryGrid) {
 }
 
 
+
 // =====================================
-// GALLERY LIGHTBOX
+// GALLERY LIGHTBOX — ANDROID BACK FIX
 // =====================================
 
 const lightbox = document.getElementById("lightbox");
-const lightboxImage = document.getElementById("lightboxImage");
-const lightboxCount = document.getElementById("lightboxCount");
 
-const closeButton = document.getElementById("lightboxClose");
-const previousButton = document.getElementById("lightboxPrev");
-const nextButton = document.getElementById("lightboxNext");
+const lightboxImage =
+  document.getElementById("lightboxImage");
+
+const lightboxCount =
+  document.getElementById("lightboxCount");
+
+const closeButton =
+  document.getElementById("lightboxClose");
+
+const previousButton =
+  document.getElementById("lightboxPrev");
+
+const nextButton =
+  document.getElementById("lightboxNext");
 
 let currentPhoto = 0;
+let lightboxHistoryOpen = false;
+
 
 function openLightbox(index) {
+
   if (!lightbox) return;
 
   currentPhoto = index;
+
   showLightboxPhoto();
 
   lightbox.classList.add("open");
+
   lightbox.setAttribute("aria-hidden", "false");
 
   document.body.style.overflow = "hidden";
+
+  if (!lightboxHistoryOpen) {
+    lightboxHistoryOpen = true;
+
+    history.pushState(
+      { lightbox: true },
+      "",
+      location.href
+    );
+  }
+
 }
 
+
 function showLightboxPhoto() {
+
   if (!lightboxImage || !lightboxCount) return;
 
-  // Original, full-quality JPG for the lightbox.
-  lightboxImage.src = `images/${photos[currentPhoto]}`;
-  lightboxImage.alt = `Mehendi design ${currentPhoto + 1}`;
+  lightboxImage.src =
+    `images/${photos[currentPhoto]}`;
+
+  lightboxImage.alt =
+    `Mehendi design ${currentPhoto + 1}`;
 
   lightboxCount.textContent =
     `${currentPhoto + 1} / ${photos.length}`;
+
 }
 
-function closeLightbox() {
+
+function closeLightbox(fromBackButton = false) {
+
   if (!lightbox) return;
 
+  if (!lightbox.classList.contains("open")) return;
+
   lightbox.classList.remove("open");
+
   lightbox.setAttribute("aria-hidden", "true");
 
   document.body.style.overflow = "";
+
+  if (lightboxHistoryOpen) {
+
+    lightboxHistoryOpen = false;
+
+    if (!fromBackButton) {
+      history.back();
+    }
+
+  }
+
 }
+
+
+// Android and browser Back button
+
+window.addEventListener("popstate", () => {
+
+  if (lightbox && lightbox.classList.contains("open")) {
+
+    closeLightbox(true);
+
+  }
+
+});
+
 
 function showNextPhoto() {
-  currentPhoto = (currentPhoto + 1) % photos.length;
+
+  currentPhoto =
+    (currentPhoto + 1) % photos.length;
+
   showLightboxPhoto();
+
 }
 
+
 function showPreviousPhoto() {
+
   currentPhoto =
     (currentPhoto - 1 + photos.length) % photos.length;
 
   showLightboxPhoto();
+
 }
+
 
 if (closeButton) {
   closeButton.addEventListener("click", closeLightbox);
@@ -174,23 +243,38 @@ if (previousButton) {
   previousButton.addEventListener("click", showPreviousPhoto);
 }
 
+
 if (lightbox) {
+
   lightbox.addEventListener("click", (event) => {
+
     if (event.target === lightbox) {
       closeLightbox();
     }
+
   });
 
+
   // Swipe support for phones
+
   let touchStartX = 0;
+  let touchEndX = 0;
 
   lightbox.addEventListener("touchstart", (event) => {
-    touchStartX = event.changedTouches[0].screenX;
+
+    touchStartX =
+      event.changedTouches[0].screenX;
+
   }, { passive: true });
 
+
   lightbox.addEventListener("touchend", (event) => {
-    const touchEndX = event.changedTouches[0].screenX;
-    const distance = touchEndX - touchStartX;
+
+    touchEndX =
+      event.changedTouches[0].screenX;
+
+    const distance =
+      touchEndX - touchStartX;
 
     if (Math.abs(distance) < 45) return;
 
@@ -199,17 +283,29 @@ if (lightbox) {
     } else {
       showPreviousPhoto();
     }
+
   }, { passive: true });
+
 }
 
+
 document.addEventListener("keydown", (event) => {
+
   if (!lightbox || !lightbox.classList.contains("open")) return;
 
-  if (event.key === "Escape") closeLightbox();
-  if (event.key === "ArrowRight") showNextPhoto();
-  if (event.key === "ArrowLeft") showPreviousPhoto();
-});
+  if (event.key === "Escape") {
+    closeLightbox();
+  }
 
+  if (event.key === "ArrowRight") {
+    showNextPhoto();
+  }
+
+  if (event.key === "ArrowLeft") {
+    showPreviousPhoto();
+  }
+
+});
 
 // =====================================
 // HEADER — APPEAR WHEN ABOUT ENTERS
